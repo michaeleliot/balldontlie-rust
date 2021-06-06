@@ -1,7 +1,6 @@
 use crate::basketball_types::{Game, ListReturnValue};
 use crate::helpers::{format_numbers_query_param_array, format_strings_query_param_array};
 
-// TODO Add other query params which can't become string easily
 pub struct GamesQueryParams {
   pub page: u32,
   pub per_page: u32,
