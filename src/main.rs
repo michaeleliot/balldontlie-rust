@@ -1,4 +1,4 @@
-mod teams; mod players; mod games; mod basketball_types;
+mod teams; mod players; mod games; mod basketball_types; mod helpers;
 use teams::{get_teams, get_team, TeamQueryParams};
 use players::{get_players, get_player, PlayerQueryParams};
 use games::{get_games};

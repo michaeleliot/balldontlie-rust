@@ -1,4 +1,5 @@
 use crate::basketball_types::{Game, ListReturnValue};
+use crate::helpers::{format_numbers_query_param_array, format_strings_query_param_array};
 
 // TODO Add other query params which can't become string easily
 pub struct GamesQueryParams {
@@ -14,35 +15,21 @@ pub struct GamesQueryParams {
 
 impl Default for GamesQueryParams {
   fn default() -> Self {
-    GamesQueryParams { page: 0, per_page: 30, team_ids: vec![], dates: vec![], seasons: vec![], postseason: None, start_date: None, end_date: None }
+    GamesQueryParams {
+      page: 0,
+      per_page: 30,
+      team_ids: vec![],
+      dates: vec![],
+      seasons: vec![],
+      postseason: None,
+      start_date: None,
+      end_date: None
+    }
   }
-}
-
-fn format_numbers_query_param_array(query_param: String, arr: &Vec<u32>) -> Vec<(String, std::string::String)> {
-  let query_param_format = format!("{}[]", &query_param);
-  return arr
-    .iter()
-    .map(|x| {
-      return (query_param_format.clone(), x.to_string())
-    })
-    .collect();
-}
-
-fn format_strings_query_param_array(query_param: String, arr: &Vec<String>) -> Vec<(String, std::string::String)> {
-  let query_param_format = format!("{}[]", &query_param);
-  return arr
-    .iter()
-    .map(|x| {
-      return (query_param_format.clone(), x.to_string())
-    })
-    .collect();
 }
 
 #[tokio::main]
 pub async fn get_games(query_params: GamesQueryParams) -> Result<Vec<Game>, Box<dyn std::error::Error>> {
-  // let team_ids_string = array_to_string(&team_ids);
-  // println!("{:#?}", team_ids_string);
-  
   let mut query_params_list = vec![
     ("page".to_string(), query_params.page.to_string()),
     ("per_page".to_string(), query_params.per_page.to_string())
@@ -51,7 +38,6 @@ pub async fn get_games(query_params: GamesQueryParams) -> Result<Vec<Game>, Box<
   if query_params.postseason.is_some() {
     query_params_list.push(("postseason".to_string(), query_params.postseason.unwrap().to_string()))
   }
-
   if query_params.start_date.is_some() {
     query_params_list.push(("start_date".to_string(), query_params.start_date.unwrap().to_string()))
   }
@@ -63,8 +49,6 @@ pub async fn get_games(query_params: GamesQueryParams) -> Result<Vec<Game>, Box<
   query_params_list.append(&mut format_numbers_query_param_array("seasons".to_string(), &query_params.seasons));
   query_params_list.append(&mut format_strings_query_param_array("dates".to_string(), &query_params.dates));
 
-  println!("{:#?}", query_params_list);
-  
   let client = reqwest::Client::new();  
   let request_url = "https://www.balldontlie.io/api/v1/games";
   let resp = client.get(request_url)
