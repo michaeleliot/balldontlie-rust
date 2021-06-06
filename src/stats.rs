@@ -1,6 +1,5 @@
 use crate::basketball_types::{Stat, ListReturnValue};
 use crate::helpers::{format_numbers_query_param_array, format_strings_query_param_array};
-use serde_json::{Value};
 
 #[derive(Debug)]
 pub struct StatsQueryParams {
@@ -62,6 +61,5 @@ pub async fn get_stats(query_params: StatsQueryParams) -> Result<Vec<Stat>, Box<
     .json::<ListReturnValue<Stat>>()
     .await?;
   
-  println!("{:#?}", resp);
-  Ok(vec![])
+  Ok(resp.data)
 }

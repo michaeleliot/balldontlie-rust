@@ -1,15 +1,16 @@
-mod teams; mod players; mod games; mod basketball_types; mod helpers; mod stats;
+mod teams; mod players; mod games; mod basketball_types; mod helpers; mod stats; mod season_averages;
 use teams::{get_teams, get_team, TeamQueryParams};
 use players::{get_players, get_player, PlayerQueryParams};
 use games::{get_games};
 use stats::{get_stats};
+use season_averages::{get_season_averages};
 
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-  let stats = get_stats(Default::default()).unwrap();
+  let stats = get_season_averages(Default::default()).unwrap();
   println!("{:#?}", stats);
 
-  // let players_default = get_players(Default::default()).unwrap();
+  // let players = get_players(Default::default()).unwrap();
   // let players_query_params = PlayerQueryParams { page: 0, per_page: 3, search: "Davis".to_string() };
   // let players = get_players(players_query_params).unwrap();
   // let player = get_player(4).unwrap();

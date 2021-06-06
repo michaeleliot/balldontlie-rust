@@ -64,7 +64,7 @@ pub struct PlayerStat {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Stat {
-  id: Option<u32>,
+  id: u32,
   ast: Option<u32>,
   blk: Option<u32>,
   dreb: Option<u32>,
@@ -90,6 +90,32 @@ pub struct Stat {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+pub struct SeasonAverages {
+  player_id: u32,
+  season: u32,
+  games_played: Option<u32>,
+  ast: Option<f32>,
+  blk: Option<f32>,
+  dreb: Option<f32>,
+  fg3_pct: Option<f32>,
+  fg3a: Option<f32>,
+  fg3m: Option<f32>,
+  fg_pct: Option<f32>,
+  fga: Option<f32>,
+  fgm: Option<f32>,
+  ft_pct: Option<f32>,
+  fta: Option<f32>,
+  ftm: Option<f32>,
+  min: Option<String>,
+  oreb: Option<f32>,
+  pf: Option<f32>,
+  pts: Option<f32>,
+  reb: Option<f32>,
+  stl: Option<f32>,
+  turnover: Option<f32>,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Meta {
   total_pages: u32,
   current_page: u32,
@@ -102,4 +128,9 @@ pub struct Meta {
 pub struct ListReturnValue<T> {
     pub data: Vec<T>,
     meta: Meta,
+}
+
+#[derive(Deserialize, Debug)]
+pub struct NoMetaListReturnValue<T> {
+    pub data: Vec<T>,
 }
