@@ -1,12 +1,13 @@
-mod teams; mod players; mod games; mod basketball_types; mod helpers;
+mod teams; mod players; mod games; mod basketball_types; mod helpers; mod stats;
 use teams::{get_teams, get_team, TeamQueryParams};
 use players::{get_players, get_player, PlayerQueryParams};
 use games::{get_games};
+use stats::{get_stats};
 
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-  let games = get_games(Default::default()).unwrap();
-  println!("{:#?}", games);
+  let stats = get_stats(Default::default()).unwrap();
+  println!("{:#?}", stats);
 
   // let players_default = get_players(Default::default()).unwrap();
   // let players_query_params = PlayerQueryParams { page: 0, per_page: 3, search: "Davis".to_string() };
