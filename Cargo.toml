@@ -1,0 +1,11 @@
+[package]
+name = "ball_dont_lie"
+version = "0.1.0"
+authors = ["Michael Eliot <mieliot@protonmail.com>"]
+edition = "2018"
+
+[dependencies]
+reqwest = { version = "0.11", features = ["json"] }
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
