@@ -23,6 +23,22 @@ pub struct Team {
   name: String
 }
 
+// TODO Make a string enum of status, period, and pattern of time period
+#[derive(Serialize, Deserialize, Debug)]
+pub struct Game {
+  id: u32,
+  date: String,
+  home_team_score: u32,
+  visitor_team_score: u32,
+  season: u32,
+  period: u32,
+  status: String,
+  time: String,
+  postseason: bool,
+  home_team: Team,
+  visitor_team: Team
+}
+
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Meta {
   total_pages: u32,

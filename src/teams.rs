@@ -32,7 +32,7 @@ pub async fn get_teams(query_params: TeamQueryParams) -> Result<Vec<Team>, Box<d
 #[tokio::main]
 pub async fn get_team(team_id: u32) -> Result<Team, Box<dyn std::error::Error>> {
   let client = reqwest::Client::new();  
-  let request_url = format!("https://www.balldontlie.io/api/v1/teams/{team_id}", team_id = team_id);
+  let request_url = format!("https://www.balldontlie.io/api/v1/teams/{}", team_id);
   let resp = client.get(request_url)
     .send()
     .await?

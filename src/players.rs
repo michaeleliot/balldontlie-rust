@@ -33,7 +33,7 @@ pub async fn get_players(query_params: PlayerQueryParams) -> Result<Vec<Player>,
 
 #[tokio::main]
 pub async fn get_player(player_id: u32) -> Result<Player, Box<dyn std::error::Error>> {
-    let request_url = format!("https://www.balldontlie.io/api/v1/players/{player_id}", player_id = player_id,);
+    let request_url = format!("https://www.balldontlie.io/api/v1/players/{}", player_id);
     let resp = reqwest::get(request_url)
         .await?
         .json::<Player>()
