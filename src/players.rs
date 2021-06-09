@@ -1,8 +1,13 @@
+//! Retrieve players.
 use crate::basketball_types::{ListReturnValue, Player};
 
+/// Query Params for players api request.
 pub struct PlayerQueryParams {
+    ///Page number for pagiantion.
     pub page: u32,
+    ///Number of values per page. Max 100.
     pub per_page: u32,
+    ///Optional search string to search players
     pub search: Option<String>,
 }
 
@@ -16,6 +21,13 @@ impl Default for PlayerQueryParams {
     }
 }
 
+/// Get a vector of basketball players.
+///
+/// # Examples
+///
+/// ```
+/// get_players(Default::default())
+/// ```
 #[tokio::main]
 pub async fn get_players(
     query_params: PlayerQueryParams,
@@ -44,6 +56,13 @@ pub async fn get_players(
     Ok(resp.data)
 }
 
+/// Retrieves a basketball player.
+///
+/// # Examples
+///
+/// ```
+/// get_player(1)
+/// ```
 #[tokio::main]
 pub async fn get_player(player_id: u32) -> Result<Player, Box<dyn std::error::Error>> {
     let request_url = format!("https://www.balldontlie.io/api/v1/players/{}", player_id);

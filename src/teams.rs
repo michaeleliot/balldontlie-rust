@@ -1,8 +1,12 @@
+//! Retrieve teams.
 use crate::basketball_types::{ListReturnValue, Team};
 use std::default::Default;
 
+/// Query Params for teams api request.
 pub struct TeamQueryParams {
+    ///Page number for pagiantion.
     pub page: u32,
+    ///Number of values per page. Max 100.
     pub per_page: u32,
 }
 
@@ -15,6 +19,13 @@ impl Default for TeamQueryParams {
     }
 }
 
+/// Get a vector of teams.
+///
+/// # Examples
+///
+/// ```
+/// get_stats(Default::default())
+/// ```
 #[tokio::main]
 pub async fn get_teams(
     query_params: TeamQueryParams,
@@ -35,6 +46,13 @@ pub async fn get_teams(
     Ok(resp.data)
 }
 
+/// Get a team.
+///
+/// # Examples
+///
+/// ```
+/// get_stats(1)
+/// ```
 #[tokio::main]
 pub async fn get_team(team_id: u32) -> Result<Team, Box<dyn std::error::Error>> {
     let client = reqwest::Client::new();

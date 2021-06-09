@@ -1,10 +1,10 @@
 //! Rust bindings for the balldontlie api.
 //! https://www.balldontlie.io/#introduction
-
-mod basketball_types;
-mod games;
+#![warn(missing_docs)]
+pub mod basketball_types;
+pub mod games;
 mod helpers;
-mod players;
-mod season_averages;
-mod stats;
-mod teams;
+pub mod players;
+pub mod season_averages;
+pub mod stats;
+pub mod teams;

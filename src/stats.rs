@@ -1,16 +1,27 @@
+//! Retrieve aggregated stats for dates/players.
 use crate::basketball_types::{ListReturnValue, Stat};
 use crate::helpers::{format_numbers_query_param_array, format_strings_query_param_array};
 
 #[derive(Debug)]
+/// Query Params for stats api request.
 pub struct StatsQueryParams {
+    ///Page number for pagiantion.
     pub page: u32,
+    ///Number of values per page. Max 100.
     pub per_page: u32,
+    /// List of dates for filtering.
     pub dates: Vec<String>,
+    /// List of seasons for filtering.
     pub seasons: Vec<u32>,
+    /// List of player ids for filtering.
     pub player_ids: Vec<u32>,
+    /// List of game ids for filtering.
     pub game_ids: Vec<u32>,
+    /// Boolean value indicating if postseason games should be included.
     pub postseason: Option<bool>,
+    /// Start date for range of games.
     pub start_date: Option<String>,
+    /// End date for range of games.
     pub end_date: Option<String>,
 }
 
@@ -30,6 +41,13 @@ impl Default for StatsQueryParams {
     }
 }
 
+/// Get averaged stats over a group of dates/players returned as a vector.
+///
+/// # Examples
+///
+/// ```
+/// get_stats(Default::default())
+/// ```
 #[tokio::main]
 pub async fn get_stats(
     query_params: StatsQueryParams,

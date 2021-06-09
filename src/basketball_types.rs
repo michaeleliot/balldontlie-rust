@@ -1,6 +1,8 @@
+//! Types for balldontlie data.
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
+/// A Basketball Player.
 pub struct Player {
     id: u32,
     first_name: String,
@@ -13,6 +15,7 @@ pub struct Player {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+/// A Basketball Team.
 pub struct Team {
     abbreviation: String,
     city: String,
@@ -25,6 +28,7 @@ pub struct Team {
 
 // TODO Make a string enum of status, period, and pattern of time period
 #[derive(Serialize, Deserialize, Debug)]
+/// A Basketball Game.
 pub struct Game {
     id: u32,
     date: String,
@@ -40,6 +44,7 @@ pub struct Game {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+/// The stats for a basketball game.
 pub struct GameStat {
     id: u32,
     date: String,
@@ -51,6 +56,7 @@ pub struct GameStat {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+/// The stats for a basketball player.
 pub struct PlayerStat {
     id: u32,
     first_name: String,
@@ -63,6 +69,7 @@ pub struct PlayerStat {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+/// The detailed stats for an individual game and individual player. I.e. player x in game y
 pub struct Stat {
     id: u32,
     ast: Option<u32>,
@@ -90,6 +97,7 @@ pub struct Stat {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+/// The season averages for a particular player.
 pub struct SeasonAverages {
     player_id: u32,
     season: u32,
@@ -116,6 +124,7 @@ pub struct SeasonAverages {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+/// Meta information about the api call, mainly for pagination.
 pub struct Meta {
     total_pages: u32,
     current_page: u32,
@@ -125,12 +134,16 @@ pub struct Meta {
 }
 
 #[derive(Deserialize, Debug)]
+/// Return Value from balldontlie.
 pub struct ListReturnValue<T> {
+    /// The return data.
     pub data: Vec<T>,
     meta: Meta,
 }
 
 #[derive(Deserialize, Debug)]
+/// Return Value from balldontlie without meta.
 pub struct NoMetaListReturnValue<T> {
+    /// The return data.
     pub data: Vec<T>,
 }
