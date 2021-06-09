@@ -106,6 +106,7 @@ pub async fn get_games(
 ///
 /// # Examples
 ///
+/// ```
 /// get_game(1533)
 /// ```
 #[tokio::main]
