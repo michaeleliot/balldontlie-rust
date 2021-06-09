@@ -3,14 +3,14 @@ use crate::helpers::format_numbers_query_param_array;
 
 #[derive(Debug)]
 pub struct SeasonAverageQueryParams {
-    pub season: u32,
+    pub season: Option<u32>,
     pub player_ids: Vec<u32>,
 }
 
 impl Default for SeasonAverageQueryParams {
     fn default() -> Self {
         SeasonAverageQueryParams {
-            season: 2019,
+            season: None,
             player_ids: vec![],
         }
     }
@@ -20,8 +20,14 @@ impl Default for SeasonAverageQueryParams {
 pub async fn get_season_averages(
     query_params: SeasonAverageQueryParams,
 ) -> Result<Vec<SeasonAverages>, Box<dyn std::error::Error>> {
-    let mut query_params_list = vec![("season".to_string(), query_params.season.to_string())];
+    let mut query_params_list = vec![];
 
+    if query_params.season.is_some() {
+      query_params_list.push((
+          "season".to_string(),
+          query_params.season.unwrap().to_string(),
+      ))
+    }
     query_params_list.append(&mut format_numbers_query_param_array(
         "player_ids".to_string(),
         &query_params.player_ids,
