@@ -37,6 +37,5 @@ pub async fn get_season_averages(
         .json::<NoMetaListReturnValue<SeasonAverages>>()
         .await?;
 
-    println!("{:#?}", resp);
-    Ok(vec![])
+    Ok(resp.data)
 }

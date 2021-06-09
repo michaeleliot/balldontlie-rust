@@ -3,7 +3,7 @@ use crate::basketball_types::{ListReturnValue, Player};
 pub struct PlayerQueryParams {
     pub page: u32,
     pub per_page: u32,
-    pub search: String,
+    pub search: Option<String>,
 }
 
 impl Default for PlayerQueryParams {
@@ -11,7 +11,7 @@ impl Default for PlayerQueryParams {
         PlayerQueryParams {
             page: 0,
             per_page: 30,
-            search: "".to_string(),
+            search: None,
         }
     }
 }
@@ -20,11 +20,17 @@ impl Default for PlayerQueryParams {
 pub async fn get_players(
     query_params: PlayerQueryParams,
 ) -> Result<Vec<Player>, Box<dyn std::error::Error>> {
-    let query_params_list = vec![
+    let mut query_params_list = vec![
         ("page", query_params.page.to_string()),
-        ("per_page", query_params.per_page.to_string()),
-        ("search", query_params.search),
+        ("per_page", query_params.per_page.to_string())
     ];
+
+    if query_params.search.is_some() {
+        query_params_list.push((
+            "search",
+            query_params.search.unwrap().to_string(),
+        ))
+    }
 
     let client = reqwest::Client::new();
     let request_url = "https://www.balldontlie.io/api/v1/players";
