@@ -1,6 +1,6 @@
 //! Rust bindings for the balldontlie api.
 //! https://www.balldontlie.io/#introduction
-#![warn(missing_docs)]
+
 pub mod basketball_types;
 pub mod games;
 mod helpers;
